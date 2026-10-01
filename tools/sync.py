@@ -147,11 +147,13 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         raise SyncError("redirect refused")
 
 
-def bounded_get(url, limit):
+def bounded_get(url, limit, accept=None):
     parsed = urllib.parse.urlsplit(url)
     if parsed.scheme != "https" or parsed.hostname not in {"api.github.com", "codeload.github.com"} or parsed.username or parsed.password or parsed.port:
         raise SyncError("source URL is outside the GitHub allowlist")
     headers = {"User-Agent": "ai4science-skills-sync"}
+    if accept:
+        headers["Accept"] = accept
     token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
     if token and parsed.hostname == "api.github.com":
         headers["Authorization"] = "Bearer " + token
@@ -165,10 +167,19 @@ def bounded_get(url, limit):
     return raw
 
 
+SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+
+
 def verify_ref(entry):
+    # Ask GitHub for the bare commit SHA (application/vnd.github.sha). The default JSON
+    # representation embeds every file patch, so a large squash commit exceeded the
+    # 128 KiB budget and a legitimate pin could never be verified.
     ref = urllib.parse.quote(entry["ref"], safe="")
-    resolved = read_json(bounded_get("https://api.github.com/repos/%s/commits/%s" % (entry["repo"], ref), 128 * 1024))
-    if resolved.get("sha") != entry["sha"]:
+    raw = bounded_get("https://api.github.com/repos/%s/commits/%s" % (entry["repo"], ref), 4 * 1024, accept="application/vnd.github.sha")
+    resolved = raw.decode("ascii", errors="replace").strip()
+    if not SHA_RE.match(resolved):
+        raise SyncError("source ref resolution returned something other than a commit SHA")
+    if resolved != entry["sha"]:
         raise SyncError("source ref does not resolve to declared commit")
 
 

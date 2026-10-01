@@ -4,19 +4,19 @@
     "name": "AI for Science community"
   },
   "description": "Community index of Claude skills for scientific work. Every entry is pinned to an exact commit and checked automatically.",
-  "version": "0.2.0-rc.1",
+  "version": "0.3.0",
   "plugins": [
     {
       "name": "szl-evidence-skills",
       "repo": "szl-holdings/szl-skills",
-      "ref": "v0.1.3",
-      "sha": "fbd4d43572d14ba4071f5662316896e53cadfd59",
+      "ref": "v0.3.1",
+      "sha": "68c037e898fae559b99bbd0fbb4d06a67e88c0ed",
       "path": "skills",
       "skills": [
         "szl-typesafe-ai",
         "szl-governed-decision"
       ],
-      "description": "TypeSafe Jev as an optional, fail-closed second reader for evidence triage; decisions that carry their own evidence.",
+      "description": "TypeSafe Jev as an optional, fail-closed second reader for evidence triage; decisions that carry their own evidence. Same source revision as the science pack.",
       "maintainer": "betterwithage (SZL Holdings)",
       "license": "Apache-2.0",
       "hosted_services": [
@@ -28,8 +28,8 @@
     {
       "name": "szl-science-skills",
       "repo": "szl-holdings/szl-skills",
-      "ref": "v0.2.0-rc.1",
-      "sha": "a314917286269630b053ea16f2d65acf1000bd8f",
+      "ref": "v0.3.1",
+      "sha": "68c037e898fae559b99bbd0fbb4d06a67e88c0ed",
       "path": "skills",
       "skills": [
         "szl-science-workbench",
@@ -39,9 +39,19 @@
         "szl-model-evaluation",
         "szl-kernel-comparison",
         "szl-reproducibility-capsule",
-        "szl-paired-science"
+        "szl-paired-science",
+        "szl-artifact-lineage",
+        "szl-unit-invariants",
+        "szl-negative-control-audit",
+        "szl-analysis-plan-audit",
+        "szl-evidence-gate",
+        "szl-cross-implementation-check",
+        "szl-analysis-mutation-test",
+        "szl-compute-energy-receipt",
+        "szl-session-receipt",
+        "szl-reviewer-pack"
       ],
-      "description": "Integrated living research anatomy, scientific checks and reproducibility capsules; explicit prerelease, offline by default.",
+      "description": "Eighteen offline, stdlib-only science checks: project workbench and claim ledger, dataset leakage, model evaluation with complete denominators, math and kernel checks, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative controls, analysis-plan audit, evidence gate, cross-implementation check, mutation coverage, energy receipts, session receipts and a one-page reviewer pack.",
       "maintainer": "betterwithage (SZL Holdings)",
       "license": "Apache-2.0",
       "hosted_services": [

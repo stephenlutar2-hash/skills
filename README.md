@@ -6,7 +6,7 @@ A community index of Claude skills for scientific work. Every skill is pinned to
 
 Claude Science: **Skills > Import from GitHub**, paste:
 
-    ai4science-skills/skills@v0.1.0
+    ai4science-skills/skills@v0.3.0
 
 Claude Code:
 
@@ -16,24 +16,21 @@ Then pick what you want. See [CATALOG.md](CATALOG.md) for every skill, its maint
 
 Imported skills do not update automatically. Re-import when a new tag is announced.
 
-## Science pack prerelease
+## What is in the index
 
-The catalog adds an explicit prerelease of eight connected SZL science skills, pinned to
-szl-holdings/szl-skills@v0.2.0-rc.1 and its immutable commit. The self-contained workbench
-connects living project memory, numerical math checks, dataset leakage checks, model
-evaluation, kernel comparison, paired qualification and retained file capsules. A separate
-offline CI step exercises this selected pack; the general importer remains static and
-never executes downloaded skill code.
+Two plugins, twenty skills, one pinned source commit (`szl-holdings/szl-skills@v0.3.1`):
 
-The stable import above remains available. To try just the source science pack in Claude
-Science, import:
+- **szl-science-skills** (18): a resumable research workbench and claim ledger, dataset leakage audit, model evaluation with complete denominators, numerical and theorem-to-code math checks, kernel comparison, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative-control audit, analysis-plan audit, an evidence gate (does each claim have a file behind it), a cross-implementation check (does the R rewrite match the Python original), mutation coverage for a pipeline's QC, typed compute-energy receipts, verifiable session receipts with a Methods paragraph, and a one-page reviewer pack. All Python standard library, offline, credential-free. Normal use contacts nothing; one explicit workbench command fetches four pinned public study files from Hugging Face.
+- **szl-evidence-skills** (2): governed decisions that carry their own evidence, and TypeSafe Jev as an optional fail-closed second reader (requires the user's own key; optional).
 
-    szl-holdings/szl-skills@v0.2.0-rc.1
+These skills check science rather than do science. They complement library-oriented collections such as [K-Dense scientific skills](https://github.com/K-Dense-AI/claude-scientific-skills): those tell an agent how to run scanpy or RDKit; these tell you whether the result that came out can be trusted as far as it claims.
 
-Normal workbench use is offline. Optional fetch-triage reads the pinned public synthetic
-study from Hugging Face, with no credentials or model weights. Actual Claude Science
-registration and agent efficacy remain unverified; local/source CI checks do not establish
-them. Setup and pilot instructions are in the source repository. No automatic update occurs.
+To import just the source pack: `szl-holdings/szl-skills@v0.3.1`. Setup and pilot instructions are in that repository. Agent efficacy in Claude Science is not yet measured; local checks do not establish it.
+
+## Proposals
+
+- [Verified tier](docs/verified-tier.md): an opt-in tier above today's static checks, with four reproducible artifacts (offline self-test run, byte manifest, fixture outputs, check receipt) and an explicit list of what VERIFIED does not mean. Proposed, not implemented.
+- [`hosted_services` disclosure field](docs/hosted-services-proposal.md): the machine-readable statement of what a skill contacts and which credentials it expects, as this index already enforces, proposed for the marketplace manifest and the Claude Science import screen.
 
 ## What every skill must pass
 

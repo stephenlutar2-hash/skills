@@ -5,12 +5,12 @@
   },
   "metadata": {
     "description": "Community index of Claude skills for scientific work. Every entry is pinned to an exact commit and checked automatically.",
-    "version": "0.2.0-rc.1"
+    "version": "0.3.0"
   },
   "plugins": [
     {
       "name": "szl-evidence-skills",
-      "description": "TypeSafe Jev as an optional, fail-closed second reader for evidence triage; decisions that carry their own evidence.",
+      "description": "TypeSafe Jev as an optional, fail-closed second reader for evidence triage; decisions that carry their own evidence. Same source revision as the science pack.",
       "source": "./plugins/szl-evidence-skills",
       "strict": false,
       "skills": [
@@ -21,28 +21,38 @@
         "name": "betterwithage (SZL Holdings)"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.com/szl-holdings/szl-skills/tree/fbd4d43572d14ba4071f5662316896e53cadfd59"
+      "homepage": "https://github.com/szl-holdings/szl-skills/tree/68c037e898fae559b99bbd0fbb4d06a67e88c0ed"
     },
     {
       "name": "szl-science-skills",
-      "description": "Integrated living research anatomy, scientific checks and reproducibility capsules; explicit prerelease, offline by default.",
+      "description": "Eighteen offline, stdlib-only science checks: project workbench and claim ledger, dataset leakage, model evaluation with complete denominators, math and kernel checks, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative controls, analysis-plan audit, evidence gate, cross-implementation check, mutation coverage, energy receipts, session receipts and a one-page reviewer pack.",
       "source": "./plugins/szl-science-skills",
       "strict": false,
       "skills": [
+        "./skills/szl-analysis-mutation-test",
+        "./skills/szl-analysis-plan-audit",
+        "./skills/szl-artifact-lineage",
+        "./skills/szl-compute-energy-receipt",
+        "./skills/szl-cross-implementation-check",
         "./skills/szl-dataset-readiness",
+        "./skills/szl-evidence-gate",
         "./skills/szl-kernel-comparison",
         "./skills/szl-math-claim-check",
         "./skills/szl-model-evaluation",
+        "./skills/szl-negative-control-audit",
         "./skills/szl-paired-science",
         "./skills/szl-reproducibility-capsule",
         "./skills/szl-research-anatomy",
-        "./skills/szl-science-workbench"
+        "./skills/szl-reviewer-pack",
+        "./skills/szl-science-workbench",
+        "./skills/szl-session-receipt",
+        "./skills/szl-unit-invariants"
       ],
       "author": {
         "name": "betterwithage (SZL Holdings)"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.com/szl-holdings/szl-skills/tree/a314917286269630b053ea16f2d65acf1000bd8f"
+      "homepage": "https://github.com/szl-holdings/szl-skills/tree/68c037e898fae559b99bbd0fbb4d06a67e88c0ed"
     }
   ]
 }

@@ -123,10 +123,14 @@ class ImporterTests(unittest.TestCase):
             sync.prepare(candidate, archive())
 
     def test_ref_resolves_to_exact_commit(self):
-        with patch.object(sync, "bounded_get", return_value=json.dumps({"sha": "2" * 40}).encode()), self.assertRaises(sync.SyncError):
+        with patch.object(sync, "bounded_get", return_value=("2" * 40).encode()), self.assertRaises(sync.SyncError):
             sync.verify_ref(entry())
-        with patch.object(sync, "bounded_get", return_value=json.dumps({"sha": "1" * 40}).encode()):
+        with patch.object(sync, "bounded_get", return_value=json.dumps({"sha": "1" * 40}).encode()), self.assertRaises(sync.SyncError):
+            sync.verify_ref(entry())  # JSON body is not a bare SHA: the sha media type must be honoured
+        with patch.object(sync, "bounded_get", return_value=("1" * 40 + "\n").encode()) as get:
             sync.verify_ref(entry())
+            self.assertEqual(get.call_args.kwargs.get("accept"), "application/vnd.github.sha")
+            self.assertLessEqual(get.call_args.args[1], 4 * 1024)
 
     def test_redirects_and_external_source_urls_refused(self):
         with self.assertRaises(sync.SyncError):
