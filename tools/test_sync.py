@@ -228,3 +228,62 @@ class ImporterTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SelectedFetchTests(unittest.TestCase):
+    """fetch_selected rebuilds a codeload-shaped archive from the Git Trees and Blobs API."""
+
+    def entry(self):
+        return {"name": "demo", "repo": "owner/repo", "ref": "v1", "sha": "1" * 40, "path": "skills",
+                "skills": ["alpha"], "description": "d", "maintainer": "m", "license": "MIT", "hosted_services": [],
+                "fetch": "selected"}
+
+    def fake_api(self, blobs, truncated=False, mode="100644"):
+        import hashlib as _h
+        tree = {"truncated": truncated, "tree": []}
+        for path, data in blobs.items():
+            sha = _h.sha1(b"blob %d\0" % len(data) + data).hexdigest()
+            tree["tree"].append({"path": path, "type": "blob", "mode": mode, "sha": sha, "size": len(data)})
+        tree["tree"].append({"path": "skills", "type": "tree", "mode": "040000", "sha": "0" * 40})
+        by_sha = {t["sha"]: blobs[t["path"]] for t in tree["tree"] if t["type"] == "blob"}
+
+        def get(url, limit, accept=None):
+            if "/git/trees/" in url:
+                return json.dumps(tree).encode()
+            if "/git/blobs/" in url:
+                return by_sha[url.rsplit("/", 1)[1]]
+            raise AssertionError(url)
+        return get
+
+    def test_selected_fetch_yields_only_requested_paths_and_passes_prepare(self):
+        blobs = {"LICENSE": b"Permission is hereby granted, free of charge\n", "skills/alpha/SKILL.md": b"---\nname: alpha\ndescription: d\n---\nIt does not run.\n",
+                 "skills/alpha/scripts/run.py": b"print(1)\n", "skills/beta/SKILL.md": b"---\nname: beta\n---\n", "README.md": b"# big repo\n"}
+        with patch.object(sync, "bounded_get", side_effect=self.fake_api(blobs)):
+            raw = sync.fetch_selected(self.entry())
+        files = sync.prepare(self.entry(), raw)
+        self.assertEqual(set(files), {"LICENSE", "skills/alpha/SKILL.md", "skills/alpha/scripts/run.py", "SOURCE.json"})
+
+    def test_selected_fetch_refuses_truncated_tree_symlinks_and_bad_blobs(self):
+        blobs = {"LICENSE": b"Permission is hereby granted, free of charge\n", "skills/alpha/SKILL.md": b"---\nname: alpha\n---\n"}
+        with patch.object(sync, "bounded_get", side_effect=self.fake_api(blobs, truncated=True)), self.assertRaises(sync.SyncError):
+            sync.fetch_selected(self.entry())
+        with patch.object(sync, "bounded_get", side_effect=self.fake_api(blobs, mode="120000")), self.assertRaises(sync.SyncError):
+            sync.fetch_selected(self.entry())
+        get = self.fake_api(blobs)
+
+        def tampered(url, limit, accept=None):
+            data = get(url, limit, accept)
+            return data + b"x" if "/git/blobs/" in url else data
+        with patch.object(sync, "bounded_get", side_effect=tampered), self.assertRaises(sync.SyncError):
+            sync.fetch_selected(self.entry())
+
+    def test_fetch_entry_dispatches_and_validate_entry_accepts_only_selected(self):
+        bad = self.entry(); bad["fetch"] = "sparse"
+        with self.assertRaises(sync.SyncError):
+            sync.validate_entry(bad)
+        plain = self.entry(); plain.pop("fetch")
+        with patch.object(sync, "fetch", return_value=b"tar") as full, patch.object(sync, "fetch_selected", return_value=b"sel") as sel:
+            self.assertEqual(sync.fetch_entry(plain), b"tar")
+            self.assertEqual(sync.fetch_entry(self.entry()), b"sel")
+            self.assertEqual(full.call_count, 1)
+            self.assertEqual(sel.call_count, 1)

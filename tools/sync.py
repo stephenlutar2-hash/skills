@@ -96,8 +96,10 @@ def declared_hosts(entry):
 
 def validate_entry(entry):
     required = {"name", "repo", "sha", "ref", "path", "skills", "description", "maintainer", "license", "hosted_services"}
-    if not isinstance(entry, dict) or set(entry) != required:
+    if not isinstance(entry, dict) or not required <= set(entry) or set(entry) - required - {"fetch"}:
         raise SyncError("registry entry fields must match the documented contract")
+    if "fetch" in entry and entry["fetch"] != "selected":
+        raise SyncError("fetch must be omitted (full archive) or \"selected\" (trees/blobs API)")
     if not isinstance(entry["name"], str) or not NAME.fullmatch(entry["name"]):
         raise SyncError("invalid plugin name")
     if not isinstance(entry["repo"], str) or not REPO.fullmatch(entry["repo"]) or ".." in entry["repo"]:
@@ -187,6 +189,65 @@ def fetch(repo, sha):
     return bounded_get("https://codeload.github.com/%s/tar.gz/%s" % (repo, sha), MAX_DOWNLOAD)
 
 
+BLOB_SHA_RE = re.compile(r"^[0-9a-f]{40}$")
+MAX_TREE = 8 * 1024 * 1024
+
+
+def _git_blob_sha1(data):
+    return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
+
+
+def fetch_selected(entry):
+    """Fetch only the license files and the requested skill folders through the Git Trees and
+    Blobs API, then return a tar.gz shaped exactly like the codeload archive so `prepare` applies
+    the same validation. For repositories whose full archive exceeds the download budget
+    (`"fetch": "selected"` in the registry entry). Every blob is verified against its Git SHA-1."""
+    validate_entry(entry)
+    tree = read_json(bounded_get("https://api.github.com/repos/%s/git/trees/%s?recursive=1" % (entry["repo"], entry["sha"]), MAX_TREE,
+                                 accept="application/vnd.github+json"))
+    if not isinstance(tree, dict) or tree.get("truncated") is not False or not isinstance(tree.get("tree"), list):
+        raise SyncError("tree listing is unavailable, truncated or malformed")
+    prefixes = tuple("%s/%s/" % (entry["path"], skill) for skill in entry["skills"])
+    selected, total = [], 0
+    for item in tree["tree"]:
+        if not isinstance(item, dict) or item.get("type") != "blob":
+            continue
+        path, mode, sha, size = item.get("path"), item.get("mode"), item.get("sha"), item.get("size")
+        if not isinstance(path, str) or not isinstance(sha, str) or not BLOB_SHA_RE.match(sha) or not isinstance(size, int):
+            raise SyncError("tree entry is malformed")
+        if not (path in LICENSE_NAMES or path.startswith(prefixes)):
+            continue
+        safe_path(path)
+        if mode not in ("100644", "100755"):
+            raise SyncError("archive links and special files are refused")
+        if size >= MAX_PLUGIN:
+            raise SyncError("selected file exceeds budget or has duplicate destination")
+        total += size
+        if total >= MAX_PLUGIN:
+            raise SyncError("plugin exceeds byte budget")
+        if len(selected) >= MAX_MEMBERS:
+            raise SyncError("archive exceeds member budget")
+        selected.append((path, sha, size))
+    if not selected:
+        raise SyncError("requested skill has no SKILL.md at pinned commit")
+    root = "%s-%s" % (entry["repo"].split("/", 1)[1], entry["sha"])
+    buffer = io.BytesIO()
+    with tarfile.open(fileobj=buffer, mode="w:gz") as archive:
+        for path, sha, size in sorted(selected):
+            data = bounded_get("https://api.github.com/repos/%s/git/blobs/%s" % (entry["repo"], sha), MAX_PLUGIN, accept="application/vnd.github.raw+json")
+            if len(data) != size or _git_blob_sha1(data) != sha:
+                raise SyncError("blob bytes do not match the tree entry")
+            info = tarfile.TarInfo(root + "/" + path)
+            info.size = len(data)
+            info.mode = 0o644
+            archive.addfile(info, io.BytesIO(data))
+    return buffer.getvalue()
+
+
+def fetch_entry(entry):
+    return fetch_selected(entry) if entry.get("fetch") == "selected" else fetch(entry["repo"], entry["sha"])
+
+
 def prepare(entry, raw):
     """Validate all archive paths and budgets before returning selected bytes."""
     validate_entry(entry)
@@ -273,7 +334,7 @@ def main():
         staged = pathlib.Path(temporary)
         for entry in registry["plugins"]:
             verify_ref(entry)
-            files = prepare(entry, fetch(entry["repo"], entry["sha"]))
+            files = prepare(entry, fetch_entry(entry))
             for path, data in files.items():
                 target = staged / "plugins" / entry["name"] / path
                 target.parent.mkdir(parents=True, exist_ok=True)

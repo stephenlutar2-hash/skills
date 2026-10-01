@@ -28,8 +28,12 @@ class VendoredScienceTests(unittest.TestCase):
 
     def test_immutable_pin_and_generated_helpers_match(self):
         source = json.loads((PLUGIN / "SOURCE.json").read_text())
-        self.assertEqual(source["sha"], "a314917286269630b053ea16f2d65acf1000bd8f")
-        self.assertEqual(source["ref"], "v0.2.0-rc.1")
+        entry = next(e for e in json.loads((ROOT / "registry.json").read_text())["plugins"] if e["name"] == "szl-science-skills")
+        # The vendored pin must be the registry pin: a full 40-hex commit id and the tag it was resolved from.
+        self.assertEqual(source["sha"], entry["sha"])
+        self.assertEqual(source["ref"], entry["ref"])
+        self.assertRegex(source["sha"], r"^[0-9a-f]{40}$")
+        self.assertEqual(source["ref"], "v0.3.1")
         records = json.loads((SKILL / "references" / "implementations.json").read_text())
         self.assertEqual(len(records), 8)
         for record in records:

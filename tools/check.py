@@ -137,6 +137,11 @@ def audit(root):
                     continue
                 target = directory / ref
                 # A reference may name a bundled directory (for example a fixture tree); it must exist either way.
+                # A bare script name (no slash) may live in any subfolder of the skill, typically scripts/.
+                if "/" not in ref and not target.is_file():
+                    found = [p for p in directory.rglob(ref) if p.is_file()]
+                    if found:
+                        continue
                 if not (target.is_file() or (target.is_dir() and any(target.iterdir()))):
                     fails.append(tag + ": referenced file missing")
         for path in files:

@@ -18,14 +18,23 @@ Imported skills do not update automatically. Re-import when a new tag is announc
 
 ## What is in the index
 
-Two plugins, twenty skills, one pinned source commit (`szl-holdings/szl-skills@v0.3.1`):
+Three plugins from two publishers, twenty-three skills, every one pinned to an immutable commit:
 
 - **szl-science-skills** (18): a resumable research workbench and claim ledger, dataset leakage audit, model evaluation with complete denominators, numerical and theorem-to-code math checks, kernel comparison, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative-control audit, analysis-plan audit, an evidence gate (does each claim have a file behind it), a cross-implementation check (does the R rewrite match the Python original), mutation coverage for a pipeline's QC, typed compute-energy receipts, verifiable session receipts with a Methods paragraph, and a one-page reviewer pack. All Python standard library, offline, credential-free. Normal use contacts nothing; one explicit workbench command fetches four pinned public study files from Hugging Face.
 - **szl-evidence-skills** (2): governed decisions that carry their own evidence, and TypeSafe Jev as an optional fail-closed second reader (requires the user's own key; optional).
+- **k-dense-scientific-rigor** (3, MIT, maintained upstream by K-Dense): `experimental-design`, `statistical-power` and `scientific-critical-thinking` from [K-Dense scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) at tag v2.71.0. Selected because they are the advisory half of what the SZL checks verify: design before data, a priori power, structured appraisal. No bundled script contacts the network; the hosts listed in the catalog are citation links. The upstream repository is about 470 MB, so this entry uses the importer's selective fetch (below).
 
 These skills check science rather than do science. They complement library-oriented collections such as [K-Dense scientific skills](https://github.com/K-Dense-AI/claude-scientific-skills): those tell an agent how to run scanpy or RDKit; these tell you whether the result that came out can be trusted as far as it claims.
 
 To import just the source pack: `szl-holdings/szl-skills@v0.3.1`. Setup and pilot instructions are in that repository. Agent efficacy in Claude Science is not yet measured; local checks do not establish it.
+
+## Import only the skills (feature request #1, implemented here)
+
+A registry entry may declare `"fetch": "selected"`. The importer then lists the pinned commit's
+Git tree, fetches only the license files and the requested skill folders blob by blob through the
+GitHub API, verifies every blob against its Git SHA-1, and rebuilds an archive shaped like the full
+one so the same validation applies. A 470 MB repository costs a few hundred kilobytes. Unauthenticated
+GitHub API calls are limited to 60 per hour; CI sets `GITHUB_TOKEN`.
 
 ## Proposals
 

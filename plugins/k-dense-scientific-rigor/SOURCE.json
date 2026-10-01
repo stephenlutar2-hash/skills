@@ -1,0 +1,31 @@
+{
+  "repo": "K-Dense-AI/scientific-agent-skills",
+  "ref": "v2.71.0",
+  "sha": "200dd3e8728276cfd8ae29435e66a45fb4e2a14e",
+  "path": "skills",
+  "files_sha256": {
+    "LICENSE.md": "09b02a3c9df3053c55531d503357a9c7cde275970e6c3ceaa1ddf5f0e90b40c1",
+    "skills/experimental-design/SKILL.md": "db2de0f3d29b7729776a91e923c9c83801298f5ad8e88fe44570045fbefcc248",
+    "skills/experimental-design/references/design_types.md": "1f36f14160bc9895773a2922402869202866410c9130f2b32c5a54e5f5a6e71b",
+    "skills/experimental-design/references/factorial_and_doe.md": "a59fa2279c439c096a66955b4923ad68c00d6046570665e6f6d36e807fa1de63",
+    "skills/experimental-design/references/randomization_and_blocking.md": "fabcfae913397fb8c3018b959b67ddf8fe47322b40cbf4155d898fa11738e9ae",
+    "skills/experimental-design/references/sequential_and_adaptive.md": "83085e2cde0942de23670d3aabb30768fb576a6aa99c2e4ac6f7790b00977051",
+    "skills/experimental-design/scripts/doe_designs.py": "916996b5e6a5dbb9a408aa1e755a95800af70231e46d12c8c5efddb9e3e30683",
+    "skills/experimental-design/scripts/randomization.py": "c7c2eab469618a4b27548058b924ec3f4aafaf635d3797af920b9058e700bce4",
+    "skills/scientific-critical-thinking/SKILL.md": "563af70571b7dcd6a96bf2e303bedfdcba623b4e9f082d58f04aacbc961fdae4",
+    "skills/scientific-critical-thinking/references/common_biases.md": "641e8e8e6dfadac1643ea8691b7d3e4e58cf013f134cd42c71301878096a5a39",
+    "skills/scientific-critical-thinking/references/core_capabilities.md": "0f337b96aa2d7453433a17824368fbd0638b9469d4f90a5fd23f4167c9dee180",
+    "skills/scientific-critical-thinking/references/evidence_hierarchy.md": "534fbe991ecfb2d162f755004dc528118ce74a78862917c2911595a522d76e6c",
+    "skills/scientific-critical-thinking/references/experimental_design.md": "eca7e42025393984c07676f3d4bc354d217e5604dc2209c76215d31953a7c74c",
+    "skills/scientific-critical-thinking/references/logical_fallacies.md": "becfc5bfac7b831dca67cc442cd0fcb42d8eea527a6fc2921c1b704e592ff593",
+    "skills/scientific-critical-thinking/references/review_sources.md": "71e75106f36f3e69b28959ad1fec503ccdb21b7f5361ab230173e4812accbf62",
+    "skills/scientific-critical-thinking/references/scientific_method.md": "5aa925b97c7a916f819dafc8b42a9c24e4bd3eb2836594e724f1e7f9ae75ea0f",
+    "skills/scientific-critical-thinking/references/statistical_pitfalls.md": "0c43204a0a81110cfeb7c982fa4caa89f274bdcebf096e09e5adfccf31241cb9",
+    "skills/statistical-power/SKILL.md": "a969660eafdc3504ac36e49bd7ded00e18b00fe5cef5699940d5d8281e24dd3d",
+    "skills/statistical-power/references/closed_form_recipes.md": "c303aa5b5103077304254f48309169609a3b0537748c68e0df4abd33cb9d4384",
+    "skills/statistical-power/references/effect_sizes.md": "b2e3c9578dce59222797ea55e9bc2c3883764adfdfdc0eed3793fb4d71fbf0a7",
+    "skills/statistical-power/references/simulation_based_power.md": "963fd56791e6db1bffb94efda7c9bef9c3195e3dec3e2a9918d17f3536ec150f",
+    "skills/statistical-power/scripts/power.py": "9124b7c657ccbfe8b41c777bd9e17ae076641939e4ae93b4ba17f2de18284b7d",
+    "skills/statistical-power/scripts/simulate_power.py": "bfbe75908ca071528b7b02aa1ed53949a7291f928f30634abe29b3ce23c564f4"
+  }
+}

@@ -53,6 +53,22 @@
       },
       "license": "Apache-2.0",
       "homepage": "https://github.com/szl-holdings/szl-skills/tree/68c037e898fae559b99bbd0fbb4d06a67e88c0ed"
+    },
+    {
+      "name": "k-dense-scientific-rigor",
+      "description": "Three study-design and evidence-appraisal skills from K-Dense's claude-scientific-skills, selected because they complement the executable SZL checks: design before data (randomization, blocking, factorial layouts), a priori power and sample size, and structured critical appraisal (biases, confounders, GRADE and Cochrane tools). Advisory, prompt-and-script guidance; indexed at a pinned upstream tag and maintained upstream by K-Dense.",
+      "source": "./plugins/k-dense-scientific-rigor",
+      "strict": false,
+      "skills": [
+        "./skills/experimental-design",
+        "./skills/scientific-critical-thinking",
+        "./skills/statistical-power"
+      ],
+      "author": {
+        "name": "K-Dense-AI (indexed by betterwithage)"
+      },
+      "license": "MIT",
+      "homepage": "https://github.com/K-Dense-AI/scientific-agent-skills/tree/200dd3e8728276cfd8ae29435e66a45fb4e2a14e"
     }
   ]
 }

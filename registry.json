@@ -57,6 +57,57 @@
       "hosted_services": [
         "huggingface.co - optional explicit fetch-triage downloads four pinned public synthetic-study files and records byte hashes; public artifact CDN redirects may occur; no credentials or private data sent. Normal init/run/check is offline."
       ]
+    },
+    {
+      "name": "k-dense-scientific-rigor",
+      "repo": "K-Dense-AI/scientific-agent-skills",
+      "ref": "v2.71.0",
+      "sha": "200dd3e8728276cfd8ae29435e66a45fb4e2a14e",
+      "path": "skills",
+      "skills": [
+        "experimental-design",
+        "statistical-power",
+        "scientific-critical-thinking"
+      ],
+      "description": "Three study-design and evidence-appraisal skills from K-Dense's claude-scientific-skills, selected because they complement the executable SZL checks: design before data (randomization, blocking, factorial layouts), a priori power and sample size, and structured critical appraisal (biases, confounders, GRADE and Cochrane tools). Advisory, prompt-and-script guidance; indexed at a pinned upstream tag and maintained upstream by K-Dense.",
+      "maintainer": "K-Dense-AI (indexed by betterwithage)",
+      "license": "MIT",
+      "hosted_services": [
+        "amstar.ca - citation or documentation link in prose only; no bundled script contacts the network",
+        "arriveguidelines.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "arxiv.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "book.gradepro.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "casp-uk.net - citation or documentation link in prose only; no bundled script contacts the network",
+        "docs.rpact.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "docs.scipy.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "doi.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "eda.nc3rs.org.uk - citation or documentation link in prose only; no bundled script contacts the network",
+        "export.arxiv.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "github.com - citation or documentation link in prose only; no bundled script contacts the network",
+        "keaven.github.io - citation or documentation link in prose only; no bundled script contacts the network",
+        "lifelines.readthedocs.io - citation or documentation link in prose only; no bundled script contacts the network",
+        "link.springer.com - citation or documentation link in prose only; no bundled script contacts the network",
+        "miguelhernan.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "numpy.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "ohri.ca - citation or documentation link in prose only; no bundled script contacts the network",
+        "openrouter.ai - citation or documentation link in prose only; no bundled script contacts the network",
+        "pedro.org.au - citation or documentation link in prose only; no bundled script contacts the network",
+        "pydoe.github.io - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.amstat.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.bristol.ac.uk - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.care-statement.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.cochrane.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.consort-spirit.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.equator-network.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.fda.gov - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.itl.nist.gov - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.prisma-statement.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.riskofbias.info - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.statsmodels.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.strobe-statement.org - citation or documentation link in prose only; no bundled script contacts the network",
+        "www.wma.net - citation or documentation link in prose only; no bundled script contacts the network"
+      ],
+      "fetch": "selected"
     }
   ]
 }
