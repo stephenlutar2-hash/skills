@@ -1,7 +1,7 @@
 {
   "repo": "szl-holdings/szl-skills",
-  "ref": "v0.3.1",
-  "sha": "68c037e898fae559b99bbd0fbb4d06a67e88c0ed",
+  "ref": "v0.4.0",
+  "sha": "b36160ea1d6b375670ea662cff6a2cc67cba0f40",
   "path": "skills",
   "files_sha256": {
     "LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",

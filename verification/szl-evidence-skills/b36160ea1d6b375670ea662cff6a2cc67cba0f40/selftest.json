@@ -1,0 +1,21 @@
+{
+  "commands": [
+    {
+      "command": "python -B tools/selfcheck.py",
+      "cwd": ".",
+      "exit_code": 0,
+      "seconds": 0.248,
+      "stderr_bytes": 2133,
+      "stderr_sha256": "855b6e5600a7a0f974e9a7f873a23d7c668665c6dadb754c47f956c6400f2503",
+      "stderr_tail": ") ... ok\ntest_test_leakage_and_non_train_scale_invalid (test_paired_science.PairedScienceTests.test_test_leakage_and_non_train_scale_invalid) ... ok\ntest_units_rescaling_preserves_dimensionless_effect (test_paired_science.PairedScienceTests.test_units_rescaling_preserves_dimensionless_effect) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.096s\n\nOK\n",
+      "stdout_bytes": 31,
+      "stdout_sha256": "ef0861e292f6f9b99dc2cee1da43a2e4c0a4b8fb0684986ced7528b3daa0ca76",
+      "timed_out": false
+    }
+  ],
+  "passed": true,
+  "plugin": "szl-evidence-skills",
+  "ref": "v0.4.0",
+  "repo": "szl-holdings/szl-skills",
+  "sha": "b36160ea1d6b375670ea662cff6a2cc67cba0f40"
+}

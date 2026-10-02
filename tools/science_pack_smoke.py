@@ -33,7 +33,7 @@ class VendoredScienceTests(unittest.TestCase):
         self.assertEqual(source["sha"], entry["sha"])
         self.assertEqual(source["ref"], entry["ref"])
         self.assertRegex(source["sha"], r"^[0-9a-f]{40}$")
-        self.assertEqual(source["ref"], "v0.3.1")
+        self.assertEqual(source["ref"], "v0.4.0")
         records = json.loads((SKILL / "references" / "implementations.json").read_text())
         self.assertEqual(len(records), 8)
         for record in records:

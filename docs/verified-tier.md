@@ -1,8 +1,12 @@
 # Verified tier (proposal, v0.1)
 
-Status: PROPOSED. Nothing in this document is implemented yet. The current index checks are the
-static checks listed in [README](../README.md); this document specifies what an additional,
-clearly labelled tier would require and what it would and would not mean.
+Status: REFERENCE IMPLEMENTATION v0.1 (`tools/verify_tier.py`, 2026-10-01). The four artifacts
+below are produced by `verify_tier.py run` and re-checked by `verify_tier.py check` in CI. Two
+departures from this specification in v0.1, both stated in every receipt: isolation is
+process-level (proxy variables pointed at a closed port, no credentials in the environment, a
+temporary writable directory), not a container; and receipts are UNSIGNED. Plugins fetched with
+`"fetch": "selected"` cannot be verified because the publisher's test suite is not in the partial
+archive. The rest of this document is the specification the implementation follows.
 
 ## Why a tier
 

@@ -18,15 +18,15 @@ Imported skills do not update automatically. Re-import when a new tag is announc
 
 ## What is in the index
 
-Three plugins from two publishers, twenty-three skills, every one pinned to an immutable commit:
+Three plugins from two publishers, twenty-eight skills, every one pinned to an immutable commit:
 
-- **szl-science-skills** (18): a resumable research workbench and claim ledger, dataset leakage audit, model evaluation with complete denominators, numerical and theorem-to-code math checks, kernel comparison, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative-control audit, analysis-plan audit, an evidence gate (does each claim have a file behind it), a cross-implementation check (does the R rewrite match the Python original), mutation coverage for a pipeline's QC, typed compute-energy receipts, verifiable session receipts with a Methods paragraph, and a one-page reviewer pack. All Python standard library, offline, credential-free. Normal use contacts nothing; one explicit workbench command fetches four pinned public study files from Hugging Face.
+- **szl-science-skills** (23): a resumable research workbench and claim ledger, dataset leakage audit, model evaluation with complete denominators, numerical and theorem-to-code math checks, kernel comparison, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative-control audit, analysis-plan audit, an evidence gate (does each claim have a file behind it), a cross-implementation check (does the R rewrite match the Python original), mutation coverage for a pipeline's QC, typed compute-energy receipts, verifiable session receipts with a Methods paragraph, a one-page reviewer pack, and five additions in v0.4.0: an append-only hash-chained refutation ledger (what has and has not replicated, and what rests on it), retrieval evaluation with complete denominators, a quantization and port check, a multi-repository pin, and a result-fragility index against lost-to-follow-up. All Python standard library, offline, credential-free. Normal use contacts nothing; one explicit workbench command fetches four pinned public study files from Hugging Face.
 - **szl-evidence-skills** (2): governed decisions that carry their own evidence, and TypeSafe Jev as an optional fail-closed second reader (requires the user's own key; optional).
 - **k-dense-scientific-rigor** (3, MIT, maintained upstream by K-Dense): `experimental-design`, `statistical-power` and `scientific-critical-thinking` from [K-Dense scientific-agent-skills](https://github.com/K-Dense-AI/scientific-agent-skills) at tag v2.71.0. Selected because they are the advisory half of what the SZL checks verify: design before data, a priori power, structured appraisal. No bundled script contacts the network; the hosts listed in the catalog are citation links. The upstream repository is about 470 MB, so this entry uses the importer's selective fetch (below).
 
 These skills check science rather than do science. They complement library-oriented collections such as [K-Dense scientific skills](https://github.com/K-Dense-AI/claude-scientific-skills): those tell an agent how to run scanpy or RDKit; these tell you whether the result that came out can be trusted as far as it claims.
 
-To import just the source pack: `szl-holdings/szl-skills@v0.3.1`. Setup and pilot instructions are in that repository. Agent efficacy in Claude Science is not yet measured; local checks do not establish it.
+To import just the source pack: `szl-holdings/szl-skills@v0.4.0`. Setup and pilot instructions are in that repository. Agent efficacy in Claude Science is not yet measured; local checks do not establish it.
 
 ## Import only the skills (feature request #1, implemented here)
 
@@ -38,7 +38,7 @@ GitHub API calls are limited to 60 per hour; CI sets `GITHUB_TOKEN`.
 
 ## Proposals
 
-- [Verified tier](docs/verified-tier.md): an opt-in tier above today's static checks, with four reproducible artifacts (offline self-test run, byte manifest, fixture outputs, check receipt) and an explicit list of what VERIFIED does not mean. Proposed, not implemented.
+- [Verified tier](docs/verified-tier.md): an opt-in tier above today's static checks, with four reproducible artifacts (offline self-test run, byte manifest, fixture outputs, check receipt) and an explicit list of what VERIFIED does not mean. Reference checker v0.1 is `tools/verify_tier.py`: `run` executes a plugin's declared self-tests and fixtures from the pinned archive with proxy variables pointed at a closed port and no credentials in the environment, then writes `verification/<plugin>/<sha>/{selftest,fixtures,manifest,receipt}.json`; `check` (run in CI) recomputes the vendored manifest and reports LISTED / VERIFIED / BLOCKED in the catalog's Tier column. Receipts are UNSIGNED and say so; isolation is process-level, not a container. VERIFIED never means scientifically correct or human-reviewed.
 - [`hosted_services` disclosure field](docs/hosted-services-proposal.md): the machine-readable statement of what a skill contacts and which credentials it expects, as this index already enforces, proposed for the marketplace manifest and the Claude Science import screen.
 
 ## What every skill must pass

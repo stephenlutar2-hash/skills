@@ -1,0 +1,26 @@
+{
+  "artifact_sha256": {
+    "fixtures.json": "42393685589b422843742edae1879502441b839acbb4111e042bc712aae435e4",
+    "manifest.json": "db5d4828a895ccf777c4c7951d05a8b267ff5f6b35c399c28f026a9150ac6679",
+    "selftest.json": "5e612d75a5c266fd7fd00f394209449aa06c649c064c8752407a85015e98f061"
+  },
+  "checker": "tools/verify_tier.py",
+  "checker_version": "0.1.0",
+  "does_not_mean": "scientific correctness, safety on your data, publisher identity, triggering quality, or human review",
+  "index_commit": "8fcfed091b76f2c091440ff1b7e9a145e5fe567f",
+  "isolation": "process environment: proxy variables pointed at a closed port, no credentials, writable temp only; not a container",
+  "means": "declared commands exited as declared on this runner at the pinned commit and the vendored bytes match the manifest",
+  "network": "none",
+  "plugin": "szl-evidence-skills",
+  "runner": {
+    "ci": false,
+    "host": "space-sandbox",
+    "identity": "user",
+    "platform": "Linux-6.1.155-x86_64-with-glibc2.43",
+    "python": "3.14.3"
+  },
+  "sha": "b36160ea1d6b375670ea662cff6a2cc67cba0f40",
+  "signature": "UNSIGNED",
+  "state": "VERIFIED",
+  "utc": "2026-10-02T00:36:20Z"
+}

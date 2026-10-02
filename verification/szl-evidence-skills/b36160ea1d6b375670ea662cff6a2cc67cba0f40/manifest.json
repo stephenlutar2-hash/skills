@@ -1,0 +1,44 @@
+{
+  "bytes": 23894,
+  "file_count": 7,
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "size": 11357
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "021ac47ff117a126574e3ced3f4496b3b6e332854c683f93bd8acf2ce79c9106",
+      "size": 711
+    },
+    {
+      "path": "SOURCE.json",
+      "sha256": "35f2e152f6d10ab2fc28237da1642d088a7a57e8ec11ce429d5caf488988c535",
+      "size": 791
+    },
+    {
+      "path": "skills/szl-governed-decision/SKILL.md",
+      "sha256": "0e9c3160b2b05da75674b4f739fb77d983eff87a4a72f55c9581cfb604dba525",
+      "size": 4082
+    },
+    {
+      "path": "skills/szl-governed-decision/scripts/check_claims.py",
+      "sha256": "0d1580502fdc079bf042ff6c87a2e53a43dd9fd664a95a56789f20c22c00d00e",
+      "size": 747
+    },
+    {
+      "path": "skills/szl-governed-decision/scripts/decide.py",
+      "sha256": "babd98a5f9f60ff3ead9aa1489c074dc5b79f3e3163d927631f2896862cdc115",
+      "size": 1296
+    },
+    {
+      "path": "skills/szl-typesafe-ai/SKILL.md",
+      "sha256": "6e2a564d1985f08e99996902ede67fbbd6f1b1d11faf6c83cc60166829beb85f",
+      "size": 4910
+    }
+  ],
+  "plugin": "szl-evidence-skills",
+  "root_sha256": "c91469483a75a2607dccfa4488debefa263dceef7c53e03ae96201d9fd937b08",
+  "sha": "b36160ea1d6b375670ea662cff6a2cc67cba0f40"
+}

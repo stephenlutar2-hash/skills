@@ -1,0 +1,57 @@
+{
+  "commands": [
+    {
+      "command": "python -B tools/selfcheck.py",
+      "cwd": ".",
+      "exit_code": 0,
+      "seconds": 0.249,
+      "stderr_bytes": 2133,
+      "stderr_sha256": "99b1e56f61e113e41c4782139fa4980aa8bbb28520bec4ad5b45a5e889362485",
+      "stderr_tail": ") ... ok\ntest_test_leakage_and_non_train_scale_invalid (test_paired_science.PairedScienceTests.test_test_leakage_and_non_train_scale_invalid) ... ok\ntest_units_rescaling_preserves_dimensionless_effect (test_paired_science.PairedScienceTests.test_units_rescaling_preserves_dimensionless_effect) ... ok\n\n----------------------------------------------------------------------\nRan 14 tests in 0.097s\n\nOK\n",
+      "stdout_bytes": 31,
+      "stdout_sha256": "ef0861e292f6f9b99dc2cee1da43a2e4c0a4b8fb0684986ced7528b3daa0ca76",
+      "timed_out": false
+    },
+    {
+      "command": "python -B -m unittest discover -s tests -p test_science_pack_v0*.py -q",
+      "cwd": ".",
+      "exit_code": 0,
+      "seconds": 6.768,
+      "stderr_bytes": 98,
+      "stderr_sha256": "97ca5ff7bd527a521ddd4be2462f04fac9f8e06a0ca86153fcd92f53d23ecf8e",
+      "stderr_tail": "----------------------------------------------------------------------\nRan 36 tests in 6.674s\n\nOK\n",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timed_out": false
+    },
+    {
+      "command": "python -B -m unittest tests.test_science_workbench -q",
+      "cwd": ".",
+      "exit_code": 0,
+      "seconds": 0.543,
+      "stderr_bytes": 98,
+      "stderr_sha256": "2633e79f063e71d5fc3f9550de20dfa17b703dfd0e7bf56eaa3331ae2adb3a69",
+      "stderr_tail": "----------------------------------------------------------------------\nRan 10 tests in 0.420s\n\nOK\n",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timed_out": false
+    },
+    {
+      "command": "python -B -m unittest discover -s tools -p test_paired_science.py -q",
+      "cwd": ".",
+      "exit_code": 0,
+      "seconds": 0.19,
+      "stderr_bytes": 98,
+      "stderr_sha256": "8fcc4c515a9a31f348f3cb088a5d57a310b903f016a9a507d283de310314529a",
+      "stderr_tail": "----------------------------------------------------------------------\nRan 14 tests in 0.105s\n\nOK\n",
+      "stdout_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timed_out": false
+    }
+  ],
+  "passed": true,
+  "plugin": "szl-science-skills",
+  "ref": "v0.4.0",
+  "repo": "szl-holdings/szl-skills",
+  "sha": "b36160ea1d6b375670ea662cff6a2cc67cba0f40"
+}

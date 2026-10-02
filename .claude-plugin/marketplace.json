@@ -21,11 +21,11 @@
         "name": "betterwithage (SZL Holdings)"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.com/szl-holdings/szl-skills/tree/68c037e898fae559b99bbd0fbb4d06a67e88c0ed"
+      "homepage": "https://github.com/szl-holdings/szl-skills/tree/b36160ea1d6b375670ea662cff6a2cc67cba0f40"
     },
     {
       "name": "szl-science-skills",
-      "description": "Eighteen offline, stdlib-only science checks: project workbench and claim ledger, dataset leakage, model evaluation with complete denominators, math and kernel checks, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative controls, analysis-plan audit, evidence gate, cross-implementation check, mutation coverage, energy receipts, session receipts and a one-page reviewer pack.",
+      "description": "Twenty-three offline, stdlib-only science checks: project workbench and claim ledger, dataset leakage, model evaluation with complete denominators, math and kernel checks, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative controls, analysis-plan audit, evidence gate, cross-implementation check, mutation coverage, energy receipts, session receipts and a one-page reviewer pack.",
       "source": "./plugins/szl-science-skills",
       "strict": false,
       "skills": [
@@ -41,8 +41,13 @@
         "./skills/szl-model-evaluation",
         "./skills/szl-negative-control-audit",
         "./skills/szl-paired-science",
+        "./skills/szl-quantization-check",
+        "./skills/szl-refutation-ledger",
+        "./skills/szl-repo-pin",
         "./skills/szl-reproducibility-capsule",
         "./skills/szl-research-anatomy",
+        "./skills/szl-result-fragility",
+        "./skills/szl-retrieval-eval",
         "./skills/szl-reviewer-pack",
         "./skills/szl-science-workbench",
         "./skills/szl-session-receipt",
@@ -52,7 +57,7 @@
         "name": "betterwithage (SZL Holdings)"
       },
       "license": "Apache-2.0",
-      "homepage": "https://github.com/szl-holdings/szl-skills/tree/68c037e898fae559b99bbd0fbb4d06a67e88c0ed"
+      "homepage": "https://github.com/szl-holdings/szl-skills/tree/b36160ea1d6b375670ea662cff6a2cc67cba0f40"
     },
     {
       "name": "k-dense-scientific-rigor",

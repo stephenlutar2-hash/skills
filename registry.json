@@ -9,8 +9,8 @@
     {
       "name": "szl-evidence-skills",
       "repo": "szl-holdings/szl-skills",
-      "ref": "v0.3.1",
-      "sha": "68c037e898fae559b99bbd0fbb4d06a67e88c0ed",
+      "ref": "v0.4.0",
+      "sha": "b36160ea1d6b375670ea662cff6a2cc67cba0f40",
       "path": "skills",
       "skills": [
         "szl-typesafe-ai",
@@ -23,13 +23,20 @@
         "api.typesafe.ai - szl-typesafe-ai only, optional; sends the state you pass it; requires your own TypeSafe key",
         "docs.typesafe.ai - linked documentation; visiting fetches documentation, not benchmark input",
         "console.typesafe.ai - linked credential console; user-controlled credential setup"
-      ]
+      ],
+      "verification": {
+        "selftest": [
+          "python -B tools/selfcheck.py"
+        ],
+        "fixtures": [],
+        "network": "none"
+      }
     },
     {
       "name": "szl-science-skills",
       "repo": "szl-holdings/szl-skills",
-      "ref": "v0.3.1",
-      "sha": "68c037e898fae559b99bbd0fbb4d06a67e88c0ed",
+      "ref": "v0.4.0",
+      "sha": "b36160ea1d6b375670ea662cff6a2cc67cba0f40",
       "path": "skills",
       "skills": [
         "szl-science-workbench",
@@ -49,14 +56,80 @@
         "szl-analysis-mutation-test",
         "szl-compute-energy-receipt",
         "szl-session-receipt",
-        "szl-reviewer-pack"
+        "szl-reviewer-pack",
+        "szl-refutation-ledger",
+        "szl-retrieval-eval",
+        "szl-quantization-check",
+        "szl-repo-pin",
+        "szl-result-fragility"
       ],
-      "description": "Eighteen offline, stdlib-only science checks: project workbench and claim ledger, dataset leakage, model evaluation with complete denominators, math and kernel checks, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative controls, analysis-plan audit, evidence gate, cross-implementation check, mutation coverage, energy receipts, session receipts and a one-page reviewer pack.",
+      "description": "Twenty-three offline, stdlib-only science checks: project workbench and claim ledger, dataset leakage, model evaluation with complete denominators, math and kernel checks, paired qualification, reproducibility capsules, artifact lineage, unit invariants, negative controls, analysis-plan audit, evidence gate, cross-implementation check, mutation coverage, energy receipts, session receipts and a one-page reviewer pack.",
       "maintainer": "betterwithage (SZL Holdings)",
       "license": "Apache-2.0",
       "hosted_services": [
-        "huggingface.co - optional explicit fetch-triage downloads four pinned public synthetic-study files and records byte hashes; public artifact CDN redirects may occur; no credentials or private data sent. Normal init/run/check is offline."
-      ]
+        "huggingface.co - optional explicit fetch-triage downloads four pinned public synthetic-study files and records byte hashes; public artifact CDN redirects may occur; no credentials or private data sent. Normal init/run/check is offline.",
+        "example.invalid - reserved example hostname inside a refutation-ledger fixture (a receipt URL); never contacted"
+      ],
+      "verification": {
+        "selftest": [
+          "python -B tools/selfcheck.py",
+          "python -B -m unittest discover -s tests -p test_science_pack_v0*.py -q",
+          "python -B -m unittest tests.test_science_workbench -q",
+          "python -B -m unittest discover -s tools -p test_paired_science.py -q"
+        ],
+        "fixtures": [
+          {
+            "command": "python -B scripts/run.py assets/example.json",
+            "cwd": "skills/szl-evidence-gate",
+            "expect_exit": 0,
+            "expect_stdout_contains": "\"status\": \"ABSTAIN\"",
+            "claim": "SKILL.md: the example returns ABSTAIN (PASS 2, FAIL 1, ABSTAIN 1)"
+          },
+          {
+            "command": "python -B scripts/run.py assets/example.json",
+            "cwd": "skills/szl-cross-implementation-check",
+            "expect_exit": 0,
+            "expect_stdout_contains": "\"status\": \"DIVERGENT\"",
+            "claim": "SKILL.md: the example is DIVERGENT"
+          },
+          {
+            "command": "python -B scripts/run.py assets/example.json",
+            "cwd": "skills/szl-result-fragility",
+            "expect_exit": 0,
+            "expect_stdout_contains": "\"fragility_index\": 2",
+            "claim": "SKILL.md: 12/100 vs 25/100 with 7 lost to follow-up has fragility index 2 and is FRAGILE"
+          },
+          {
+            "command": "python -B scripts/run.py assets/example.json",
+            "cwd": "skills/szl-retrieval-eval",
+            "expect_exit": 0,
+            "expect_stdout_contains": "\"status\": \"SCORED\"",
+            "claim": "SKILL.md: the five-query example scores (nDCG@5 0.5144) with q5-never-run kept at zero"
+          },
+          {
+            "command": "python -B scripts/run.py assets/example.json",
+            "cwd": "skills/szl-quantization-check",
+            "expect_exit": 0,
+            "expect_stdout_contains": "\"status\": \"DEGRADED\"",
+            "claim": "SKILL.md: the flipped row p05 makes the example DEGRADED"
+          },
+          {
+            "command": "python -B scripts/run.py status assets/example.json",
+            "cwd": "skills/szl-refutation-ledger",
+            "expect_exit": 0,
+            "expect_stdout_contains": "\"shaken_claims\": [\n    \"B\",\n    \"C\"\n  ]",
+            "claim": "SKILL.md: B is NOT_REPLICATED and C rests on it, so both are shaken"
+          },
+          {
+            "command": "python -B scripts/run.py verify assets/example.json",
+            "cwd": "skills/szl-refutation-ledger",
+            "expect_exit": 0,
+            "expect_stdout_contains": "\"status\": \"VALID\"",
+            "claim": "SKILL.md: the example chain verifies VALID"
+          }
+        ],
+        "network": "none"
+      }
     },
     {
       "name": "k-dense-scientific-rigor",
